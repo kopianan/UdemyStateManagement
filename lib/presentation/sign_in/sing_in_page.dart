@@ -35,10 +35,12 @@ class _SignInPageState extends State<SignInPage> {
           } else if (state is AuthLoading) {
             print("loading");
           } else if (state is AuthLoginSuccess) {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => HomePage(
-                      loginResponse: state.dataLogin,
-                    )));
+            //Save data to local ....
+
+            context.bloc<AuthCubit>().saveUserToLocal(state.dataLogin);
+          } else if (state is AuthSuccess) {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomePage()));
           }
         }, builder: (context, state) {
           return Container(

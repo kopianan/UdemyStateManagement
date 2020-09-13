@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:state_management_udemy/presentation/home/home_page.dart';
 import 'package:state_management_udemy/presentation/sign_in/sing_in_page.dart';
+import 'package:state_management_udemy/presentation/splash_screen/splash_screen.dart';
 
 class AppWidget extends StatelessWidget {
   // This widget is the root of your application.
@@ -12,6 +13,6 @@ class AppWidget extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: SignInPage());
+        home: SplashScreen());
   }
 }

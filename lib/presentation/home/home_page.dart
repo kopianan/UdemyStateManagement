@@ -1,19 +1,32 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:state_management_udemy/application/profile/bloc/profileb_bloc.dart';
 import 'package:state_management_udemy/domain/auth/model/login_response.dart';
 import 'package:state_management_udemy/domain/core/user/model/user_response.dart';
+import 'package:state_management_udemy/presentation/sign_in/sing_in_page.dart';
+import 'package:state_management_udemy/utils/constants.dart' as constants;
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, @required this.loginResponse}) : super(key: key);
-
-  final LoginResponse loginResponse;
+  HomePage({
+    Key key,
+  }) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  LoginResponse _loginResponse;
+  @override
+  void initState() {
+    final _data = GetStorage().read(constants.USER_LOCAL_KEY);
+    _loginResponse = LoginResponse.fromJson(jsonDecode(_data));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -72,10 +85,25 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 
-  Scaffold homePageScaffold(List<Data> _data) {
+  Scaffold homePageScaffold(List<UserData> _data) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.loginResponse.token),
+        title: Text(_loginResponse.token),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.exit_to_app,
+            ),
+            onPressed: () {
+              GetStorage().erase();
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignInPage(),
+                  ));
+            },
+          )
+        ],
       ),
       body: Container(
         child: ListView.builder(
