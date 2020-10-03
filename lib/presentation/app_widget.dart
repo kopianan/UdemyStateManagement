@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_udemy/presentation/home/home_page.dart';
-import 'package:state_management_udemy/presentation/sign_in/sing_in_page.dart';
+import 'package:get/get.dart';
 import 'package:state_management_udemy/presentation/splash_screen/splash_screen.dart';
 
 class AppWidget extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,

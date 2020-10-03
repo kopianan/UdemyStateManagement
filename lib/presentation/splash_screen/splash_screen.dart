@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:state_management_udemy/application/auth/cubit/auth_cubit.dart';
 import 'package:state_management_udemy/presentation/home/home_page.dart';
 import 'package:state_management_udemy/presentation/sign_in/sing_in_page.dart';
+import 'package:state_management_udemy/presentation/user/user_page.dart';
 
 class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
           if (state is AuthLoginSuccess) {
             //go to home
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => HomePage()));
+                .push(MaterialPageRoute(builder: (context) => UserPage()));
           } else if (state is AuthError) {
             //prompt error
             Navigator.of(context)
